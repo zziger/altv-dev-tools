@@ -5,16 +5,19 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "esbuild ./index.ts --bundle --watch --outfile=../dist/client.js --define:process.env.NODE_ENV=\\\"development\\\"",
-    "build": "esbuild ./index.ts --bundle --outfile=../dist/client.js --define:process.env.NODE_ENV=\\\"production\\\""
+    "dev": "esbuild ./index.ts --format=esm --bundle --watch --external:alt-* --external:natives --outfile=../dist/client.js --define:process.env.NODE_ENV=\\\"development\\\" --define:process=\"{\\\"env\\\":{}}\"",
+    "build": "esbuild ./index.ts --format=esm --bundle --external:alt-* --external:natives --outfile=../dist/client.js --define:process.env.NODE_ENV=\\\"production\\\" --define:process=\"{\\\"env\\\":{}}\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "esbuild": "^0.13.10",
     "@altv/types-client": "^1.9.0",
     "@altv/types-natives": "^1.4.3",
-    "@altv/types-shared": "^1.0.8"
+    "@altv/types-shared": "^1.0.8",
+    "esbuild": "^0.13.10"
+  },
+  "dependencies": {
+    "util": "^0.12.4"
   }
 }

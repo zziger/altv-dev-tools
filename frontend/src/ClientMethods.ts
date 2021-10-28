@@ -1,5 +1,5 @@
 import clientRPC from "./ClientRPC";
-import {WindowSize} from "./components/ResizableWindow";
+
 
 namespace ClientMethods {
     export async function save(key: string, value: any): Promise<void> {
@@ -8,6 +8,10 @@ namespace ClientMethods {
 
     export async function get(key: string): Promise<any> {
         return clientRPC.request<any>('get', key);
+    }
+
+    export async function evalCode(type: number, id: number, code: string): Promise<string> {
+        return clientRPC.request<any>('eval', type, id, code);
     }
 }
 

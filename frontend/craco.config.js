@@ -1,6 +1,6 @@
 const findWebpackPlugin = (webpackConfig, pluginName) =>
     webpackConfig.resolve.plugins.find(
-        ({ constructor }) => constructor && constructor.name === pluginName
+        ({constructor}) => constructor && constructor.name === pluginName
     );
 
 const enableTypescriptImportsFromExternalPaths = (
@@ -41,6 +41,7 @@ const enableImportsFromExternalPaths = (webpackConfig, paths) => {
 
 const path = require("path");
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+const {addPlugins} = require("@craco/craco");
 
 // Paths to the code you want to use
 const sharedLibOne = path.resolve(__dirname, "../shared");
@@ -49,19 +50,18 @@ module.exports = {
     plugins: [
         {
             plugin: {
-                overrideWebpackConfig: ({ webpackConfig }) => {
+                overrideWebpackConfig: ({webpackConfig, context}) => {
                     enableImportsFromExternalPaths(webpackConfig, [
                         // Add the paths here
                         sharedLibOne,
                     ]);
+                    addPlugins(webpackConfig, [new MonacoWebpackPlugin({
+                        languages: ['javascript', 'typescript'],
+                        publicPath: context.env === "production" ? "/dist/frontend" : "/"
+                    })]);
                     return webpackConfig;
                 },
             },
-        },
-        {
-            plugin: new MonacoWebpackPlugin({
-                languages: ['javascript']
-            })
         }
     ],
 };

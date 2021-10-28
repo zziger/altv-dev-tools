@@ -1,69 +1,191 @@
+//noinspection CssInvalidFunction
 .codeEditor.window
   min-width: 400px
   min-height: 300px
+  position: relative
+
+  .modalFrame
+    position: absolute
+    top: 0
+    left: 0
+    height: 100%
+    width: 100%
+    color: RGB(var(--fg))
+    display: flex
+    justify-content: center
+    align-items: center
+    background: transparent
+    transition: background-color 0.2s ease
+
+    &[data-active=false]
+      pointer-events: none
+
+    &[data-active=true]
+      background: rgba(black, 0.5)
+
+    .modal
+      max-width: 70%
+      max-height: 70%
+      min-width: 25%
+      box-sizing: border-box
+      padding: 25px
+      background-color: RGB(var(--bg))
+      flex-direction: column
+      box-shadow: 0 0 20px rgba(var(--bg), 0.3)
+      overflow-x: hidden
+      overflow-y: auto
+
+      .text
+        white-space: pre-wrap
+
+      .title
+        font-size: 18px
+        font-weight: 500
+        margin-bottom: 15px
+
+      input
+
+        &[type=text]
+          width: 100%
+          border: none
+          background-color: #F1F2F2
+          outline: none
+          padding: 10px
+          box-sizing: border-box
+          font-size: 16px
+
+      select
+        width: 100%
+        padding: 6px
+        margin-bottom: 10px
+
+      .buttons
+        margin-top: 15px
+        display: flex
+        justify-content: flex-end
+
+        .button
+          background-color: rgba(var(--fg), 0.1)
+          min-width: 70px
+          height: 30px
+          display: flex
+          justify-content: center
+          align-items: center
+          transition: background-color 0.2s ease
+          cursor: pointer
+
+          &:hover
+            background-color: rgba(var(--fg), 0.2)
+
+          &:active
+            background-color: rgba(var(--fg), 0.05)
+
+          + .button
+            margin-left: 10px
+
   .innerContent
+    position: relative
+    $columnWidth: 230px
     //noinspection CssInvalidPropertyValue
     .files
-      width: 200px
+      width: $columnWidth
       height: 100%
       display: inline-block
-      border-right: 2px solid #2D2D2D
-      overflow-y: overlay
-      overflow-x: hidden
       box-sizing: border-box
       vertical-align: top
+      border-right: 2px solid RGB(var(--sep))
 
-      &::-webkit-scrollbar
-        width: 4px
-      &::-webkit-scrollbar-thumb
-        background: #1F1F1F
-
-      .file
-        padding: 10px
+      .create
         box-sizing: border-box
+        padding: 7px 2px
+        height: 60px
         display: flex
-        justify-content: space-between
-        height: 43px
+        justify-content: space-evenly
+        background: RGB(var(--bg))
+        color: RGB(var(--fg))
+        margin-bottom: 10px
 
-        &:nth-child(2n)
-          background: rgba(black, 0.05)
-
-        .name
-          max-width: 80%
-          overflow: hidden
-          text-overflow: ellipsis
-
-        .actions
+        .action
+          font-size: 14px
+          padding: 2px 5px
           display: flex
+          flex-direction: column
+          justify-content: center
+          align-items: center
 
-          .action
+          &:hover
+            background: RGB(var(--fg))
+            color: RGB(var(--bg))
             cursor: pointer
 
+      .list
+        height: calc(100% - 67px)
+        overflow-y: overlay
+        overflow-x: hidden
+        background: RGB(var(--bg))
+        &::-webkit-scrollbar
+          width: 4px
+        &::-webkit-scrollbar-thumb
+          background: RGB(var(--fg))
+
+        .file
+          padding: 10px
+          box-sizing: border-box
+          display: flex
+          justify-content: space-between
+          align-items: center
+          height: 43px
+          cursor: pointer
+          color: RGB(var(--fg))
+
+          &:nth-child(2n)
+            background: rgba(var(--fg), 0.09)
+
+          &[data-active=true]
+            background: RGB(var(--fg))
+            color: RGB(var(--bg))
+            cursor: auto
+
+          .icon
+            margin-right: 5px
+
+          .name
+            max-width: 70%
+            overflow: hidden
+            text-overflow: ellipsis
+            white-space: nowrap
+
+          .actions
+            display: flex
+
+            .action
+              cursor: pointer
+
     .mainBlock
-      width: calc(100% - 200px)
+      width: calc(100% - #{$columnWidth})
       height: 100%
       display: inline-flex
       flex-direction: column
       vertical-align: top
 
       .border
-        height: 4px
+        height: 2px
         width: 100%
-        background: #F1F2F2
-        cursor: n-resize
+        background: RGB(var(--sep))
+        cursor: ns-resize
 
       .code
-        background: gray
+        background: RGB(var(--bg))
         flex: 1
 
       .result
-        background: black
+        background: RGB(var(--bg))
         height: 30%
         font-family: monospace
         white-space: pre-wrap
         font-weight: 500
         overflow: auto
-        color: white
+        color: RGB(var(--fg))
         padding: 10px
         box-sizing: border-box
         line-height: 16px

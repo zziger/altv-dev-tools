@@ -4,6 +4,7 @@
     "client",
     "frontend"
   ],
+  "type": "module",
   "scripts": {
     "dev-frontend": "cd frontend && npm run start",
     "dev-client": "cd client && npm run dev",

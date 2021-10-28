@@ -1,0 +1,20 @@
+{
+  "name": "qa-tools-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "esbuild ./index.ts --bundle --watch --outfile=../dist/client.js --define:process.env.NODE_ENV=\\\"development\\\"",
+    "build": "esbuild ./index.ts --bundle --outfile=../dist/client.js --define:process.env.NODE_ENV=\\\"production\\\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "esbuild": "^0.13.10",
+    "@altv/types-client": "^1.9.0",
+    "@altv/types-natives": "^1.4.3",
+    "@altv/types-shared": "^1.0.8"
+  }
+}

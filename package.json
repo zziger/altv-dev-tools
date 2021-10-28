@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "workspaces": [
+    "client",
+    "frontend"
+  ],
+  "scripts": {
+    "dev-frontend": "cd frontend && npm run start",
+    "dev-client": "cd client && npm run dev",
+    "dev-server": "cd server && npm run dev",
+    "build-frontend": "cd frontend && npm run build",
+    "build-client": "cd client && npm run build",
+    "build-server": "cd server && npm run build",
+    "dev": "concurrently npm:dev-*",
+    "build": "concurrently npm:build-*"
+  },
+  "devDependencies": {
+    "concurrently": "^6.3.0"
+  }
+}

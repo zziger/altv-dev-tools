@@ -1,0 +1,72 @@
+.codeEditor.window
+  min-width: 400px
+  min-height: 300px
+  .innerContent
+    //noinspection CssInvalidPropertyValue
+    .files
+      width: 200px
+      height: 100%
+      display: inline-block
+      border-right: 2px solid #2D2D2D
+      overflow-y: overlay
+      overflow-x: hidden
+      box-sizing: border-box
+      vertical-align: top
+
+      &::-webkit-scrollbar
+        width: 4px
+      &::-webkit-scrollbar-thumb
+        background: #1F1F1F
+
+      .file
+        padding: 10px
+        box-sizing: border-box
+        display: flex
+        justify-content: space-between
+        height: 43px
+
+        &:nth-child(2n)
+          background: rgba(black, 0.05)
+
+        .name
+          max-width: 80%
+          overflow: hidden
+          text-overflow: ellipsis
+
+        .actions
+          display: flex
+
+          .action
+            cursor: pointer
+
+    .mainBlock
+      width: calc(100% - 200px)
+      height: 100%
+      display: inline-flex
+      flex-direction: column
+      vertical-align: top
+
+      .border
+        height: 4px
+        width: 100%
+        background: #F1F2F2
+        cursor: n-resize
+
+      .code
+        background: gray
+        flex: 1
+
+      .result
+        background: black
+        height: 30%
+        font-family: monospace
+        white-space: pre-wrap
+        font-weight: 500
+        overflow: auto
+        color: white
+        padding: 10px
+        box-sizing: border-box
+        line-height: 16px
+
+        &, *
+          user-select: text !important

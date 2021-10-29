@@ -13,7 +13,7 @@ export interface WindowSize extends Vector2 {
 }
 
 interface ResizableWindowProps {
-    children: (startMove: (e: React.MouseEvent) => void) => JSX.Element;
+    children: (startMove: (e: React.MouseEvent) => void, dragging: boolean) => JSX.Element;
     name: string;
     visible?: boolean;
     bgColor?: string;
@@ -22,6 +22,7 @@ interface ResizableWindowProps {
 
 interface ResizableWindowState {
     windowSize: WindowSize;
+    dragging: boolean;
 }
 
 export class ResizableWindow extends React.Component<ResizableWindowProps, ResizableWindowState> {
@@ -32,7 +33,8 @@ export class ResizableWindow extends React.Component<ResizableWindowProps, Resiz
             y: 0,
             width: 500,
             height: 500,
-        }
+        },
+        dragging: false
     }
 
     private startWindowSize?: WindowSize;
@@ -64,6 +66,7 @@ export class ResizableWindow extends React.Component<ResizableWindowProps, Resiz
         this.lastWindowSize = this.state.windowSize;
         document.addEventListener('mousemove', this.processResize);
         document.addEventListener('mouseup', this.stopResize);
+        this.setState({ dragging: true });
     }
 
     stopResize = () => {
@@ -75,6 +78,7 @@ export class ResizableWindow extends React.Component<ResizableWindowProps, Resiz
         document.removeEventListener('mousemove', this.processResize);
         document.removeEventListener('mouseup', this.stopResize);
         this.save();
+        this.setState({ dragging: false });
     };
 
     processResize = (e: MouseEvent) => {
@@ -183,7 +187,7 @@ export class ResizableWindow extends React.Component<ResizableWindowProps, Resiz
                     {this.props.children((e: React.MouseEvent) => e.target == e.currentTarget && this.startMove({
                         x: e.clientX,
                         y: e.clientY
-                    }))}
+                    }), this.state.dragging)}
                 </div>
                 <div className="edge vertical" onMouseDown={this.getResize(true, undefined)}/>
                 <div className="corner right" onMouseDown={this.getResize(false, true)}/>

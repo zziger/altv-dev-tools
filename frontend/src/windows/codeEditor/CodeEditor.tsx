@@ -99,7 +99,7 @@ class CodeEditor extends React.Component<CodeEditorProps, CodeEditorState> {
 
     log = (id: number, data: string) => {
         if (this.actionId !== id) return;
-        this.setState({ result: this.state.result + this.converter.toHtml(data) + '<br>' });
+        this.setState({result: this.state.result + this.converter.toHtml(data) + '<br>'});
     }
 
     execute = async () => {
@@ -315,13 +315,12 @@ class CodeEditor extends React.Component<CodeEditorProps, CodeEditorState> {
     }
 
     setSetting = (key: string, value: any) => {
-        this.setState({settings: {...this.state.settings, [key]: value}});
-        this.saveSettings();
+        this.setState({settings: {...this.state.settings, [key]: value}}, this.saveSettings);
     };
 
-    saveSettings() {
+    saveSettings = () => {
         ClientMethods.save('codeEditor:settings', this.state.settings);
-    }
+    };
 
     onUpdate = Utils.debounce(this.saveFile, 3000);
 
@@ -341,7 +340,7 @@ class CodeEditor extends React.Component<CodeEditorProps, CodeEditorState> {
         styleColors['--sep'] = this.state.settings.highlightSeparators === false ? styleColors['--bg'] : styleColors['--fg'];
 
         return <ResizableWindow bgColor={colors.background} fgColor={colors.foreground} name="codeEditor" visible={this.props.active}>
-            {startMove => <>
+            {(startMove, dragging) => <>
                 <div className="header" onMouseDown={startMove}>
                     <div className="name">Code
                         editor{!!this.state.activeFile && ` - ${this.state.activeFile} [${this.files.find(f => f.name === this.state.activeFile)?.type === 0 ? 'client' : 'server'}]`}</div>
@@ -385,7 +384,7 @@ class CodeEditor extends React.Component<CodeEditorProps, CodeEditorState> {
                         </div>
                     </div>
                     <div className="mainBlock" ref={this._mainBlockRef}>
-                        <div className="code" style={{
+                        <div className="code" data-dragging={dragging} style={{
                             height: (100 - this.state.resultHeight) + '%'
                         }}>
                             <Editor theme={theme} ref={this._ref} onLoaded={this.onEditorLoad} onUpdate={this.onUpdate}/>

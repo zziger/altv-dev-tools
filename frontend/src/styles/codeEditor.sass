@@ -178,6 +178,10 @@
         background: RGB(var(--bg))
         flex: 1
 
+        &[data-dragging=true]
+          & > *
+            display: none
+
       .result
         background: RGB(var(--bg))
         height: 30%

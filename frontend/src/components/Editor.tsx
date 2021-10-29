@@ -80,6 +80,7 @@ export class Editor extends React.Component<EditorProps, EditorState> {
 
     componentDidUpdate(prevProps: Readonly<EditorProps>, prevState: Readonly<EditorState>, snapshot?: any) {
         if (prevProps.theme != this.props.theme) this.monaco?.editor.setTheme(this.props.theme);
+        this.editor?.layout();
     }
 
     editorLoaded = async (_: IStandaloneCodeEditor, editor: typeof monaco) => {
@@ -209,9 +210,8 @@ export class Editor extends React.Component<EditorProps, EditorState> {
     render() {
         return this.state.loaded
             ? <MonacoEditor
-                options={{
-                    automaticLayout: true
-                }}
+                width="100%"
+                height="100%"
                 editorDidMount={this.editorLoaded}
                 language="javascript"
                 theme={this.state.loaded ? this.props.theme : 'vs-dark'}

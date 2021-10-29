@@ -22,8 +22,6 @@
         cursor: nwse-resize
 
     .content
-      overflow: hidden
-
       .header
         width: 100%
         height: 30px
@@ -63,9 +61,8 @@
             height: 100%
 
       .innerContent
-        height: calc(100% - 30px)
+        height: calc(100% - 30px - #{$frame})
         width: 100%
         max-height: calc(100% - 30px)
         max-width: 100%
         background: RGB(var(--bg))
-        overflow: hidden

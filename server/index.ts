@@ -1,6 +1,7 @@
-import GenericRPC from "../shared/RPC/RPC";
-import alt from 'alt-server';
+import alt, { Player } from 'alt-server';
 import util from "util";
+import {codeHelpers} from "../shared/codeHelpers";
+import {Vector3} from "alt-client";
 
 const colorizeError = (text: string) => '\x1b[31;1m[Error] ' + text + '\x1b[0m';
 const colorizeWarning = (text: string) => '\x1b[33;1m[Warning] ' + text + '\x1b[0m';
@@ -61,7 +62,9 @@ const patchConsole = (player: alt.Player, id: number) => {
 
 alt.onClient('codeEditor:eval', async (player, promiseId, code, id) => {
     try {
-        const res = await new AsyncFunction('alt', 'player', 'console', code)(patchAlt(player, id), player, patchConsole(player, id));
+        const res = await new AsyncFunction('alt', 'player', 'console', ...Object.keys(codeHelpers), code)(
+            patchAlt(player, id), player, patchConsole(player, id), ...Object.values(codeHelpers)
+        );
         return alt.emitClient(player, "$repl", promiseId, util.inspect(res, inspectSettings));
     } catch (e) {
         if (e instanceof Error) {
@@ -69,4 +72,11 @@ alt.onClient('codeEditor:eval', async (player, promiseId, code, id) => {
         }
         return alt.emitClient(player, "$repl", promiseId, colorizeError(util.inspect(e, {...inspectSettings, colors: false})));
     }
-})
+});
+
+alt.onClient('qaTools:spawn', (player: Player, vector: Vector3) => {
+    player.spawn(vector);
+});
+alt.onClient('qaTools:fly', (player: Player, state: boolean) => {
+    player.setStreamSyncedMeta('fly', state);
+});

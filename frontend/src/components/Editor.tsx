@@ -46,6 +46,8 @@ export const getMainColors = (theme: string): any => {
     return {...baseToken, ...token} as any;
 }
 
+const helpers = 'function asyncTimeout(number): Promise<void>;';
+
 const getTypes = Utils.lazy(async (): Promise<{ client: string; server: string; natives: string }> => {
     const [client, server, shared, natives] = await Promise.all([
         fetch('https://raw.githubusercontent.com/altmp/altv-types/master/client/index.d.ts').then(r => r.text()),
@@ -55,10 +57,10 @@ const getTypes = Utils.lazy(async (): Promise<{ client: string; server: string; 
     ])
     return {
         client: client.replace('declare module "alt-client"', 'namespace alt ') +
-            shared.replace('declare module "alt-shared"', 'namespace alt '),
+            shared.replace('declare module "alt-shared"', 'namespace alt ') + helpers,
         server: server.replace('declare module "alt-server"', 'namespace alt ') +
             shared.replace('declare module "alt-shared"', 'namespace alt ') +
-            'let player!: alt.Player;',
+            'let player!: alt.Player;' + helpers,
         natives: natives.replace('declare module "natives"', 'namespace native ') +
             'import game = native;' +
             'import natives = native;',
@@ -86,6 +88,23 @@ export class Editor extends React.Component<EditorProps, EditorState> {
     editorLoaded = async (_: IStandaloneCodeEditor, editor: typeof monaco) => {
         this.monaco = editor;
         this.editor = _;
+        // this.editor.onContextMenu((e) => {
+        //     const contextMenuElement = this.editor.getDomNode()!.querySelector(".monaco-menu-container") as HTMLElement;
+        //
+        //     if (contextMenuElement) {
+        //         const posY = (e.event.posy + contextMenuElement.clientHeight) > window.outerHeight
+        //             ? e.event.posy - contextMenuElement.clientHeight
+        //             : e.event.posy;
+        //
+        //         const posX = (e.event.posx + contextMenuElement.clientWidth) > window.outerWidth
+        //             ? e.event.posx - contextMenuElement.clientWidth
+        //             : e.event.posx;
+        //
+        //         contextMenuElement.style.position = "fixed";
+        //         contextMenuElement.style.top =  Math.max(0, Math.floor(posY)) + "px";
+        //         contextMenuElement.style.left = Math.max(0, Math.floor(posX)) + "px";
+        //     }
+        // });
         loadThemes(editor);
         this.props.onLoaded(this);
         editor.editor.setTheme(this.props.theme);
@@ -216,6 +235,9 @@ export class Editor extends React.Component<EditorProps, EditorState> {
                 language="javascript"
                 theme={this.state.loaded ? this.props.theme : 'vs-dark'}
                 defaultValue={'// loading...'}
+                options={{
+                    fixedOverflowWidgets: true
+                }}
                 onChange={() => this.props.onUpdate()}
             />
             : <div className="loading">Loading...</div>

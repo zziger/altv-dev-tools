@@ -2,8 +2,7 @@ import React from 'react';
 import '../../styles/App.sass';
 
 import Utils from "../../Utils";
-import {ResizableWindow, Vector2, WindowSize} from "../../components/ResizableWindow";
-import {start} from "repl";
+import {ResizableWindow, Vector2} from "../../components/ResizableWindow";
 import CodeIcon from '@mui/icons-material/Code';
 import DeleteIcon from '@mui/icons-material/Delete';
 import RenameIcon from '@mui/icons-material/Edit';
@@ -387,17 +386,20 @@ class CodeEditor extends React.Component<CodeEditorProps, CodeEditorState> {
                         <div className="code" data-dragging={dragging} style={{
                             height: (100 - this.state.resultHeight) + '%'
                         }}>
-                            <Editor theme={theme} ref={this._ref} onLoaded={this.onEditorLoad} onUpdate={this.onUpdate}/>
+                            <Editor  theme={theme} ref={this._ref} onLoaded={this.onEditorLoad} onUpdate={this.onUpdate}/>
                         </div>
                         <div className="border" onMouseDown={e => this.startResultResize({x: e.clientX, y: e.clientY})}/>
                         <div className="result"
                              style={{
-                                 height: this.state.resultHeight + '%', ...(this.state.settings.themeInConsole ? styleColors : {
+                                 height: this.state.resultHeight + '%',
+                                 maxHeight: this.state.resultHeight + '%', ...(this.state.settings.themeInConsole ? styleColors : {
                                      '--bg': '0, 0, 0',
                                      '--fg': '255, 255, 255'
                                  })
-                             }}
-                             dangerouslySetInnerHTML={{__html: this.state.result.length ? this.state.result : '<span style="color:#555">Loading...</span>'}}/>
+                             }}>
+                            <div className="scrollContent"
+                                 dangerouslySetInnerHTML={{__html: this.state.result.length ? this.state.result : '<span style="color:#555">Loading...</span>'}}/>
+                        </div>
                     </div>
                 </div>
                 <div className="modalFrame" data-active={!!Modal} onMouseDown={(e) => e.target === e.currentTarget && this.closeModal()}>

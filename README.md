@@ -36,6 +36,15 @@ Features:
 - Shows model boundaries
 - If the entity is alt:V Entity, shows its type and id
 
+### Fly
+
+Features:
+- Third person fly available
+- Holding Shift while entering fly will enable freecam
+- Leaving fly will teleport you to the ground (unless you're holding space)
+- You can change speed by scrolling mouse wheel
+- Q - Fly Down, E - Fly Up
+
 ## Keybinds
 
 ### Global

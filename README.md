@@ -1,7 +1,7 @@
 # alt:V Server developer tools
 
 ## Tools include:
-- Powerful ingame code editor
+- Powerful in-game code editor
 - Model inspector
 - Fly
 - Freecam
@@ -12,11 +12,11 @@
 ![Code editor](./.github/codeeditor.png)
 ![Code editor themes](./.github/codeeditor2.png)
 
-Ingame code editor allows you to execute some JS code on client- or server- side directly in the game, while having autocompletion, hints, and so on.
+In-game code editor allows you to execute some JS code on client- or server- side directly in the game, while having autocompletion, hints, and so on.
 
 Features:
 - Resizable and movable window
-- File persistance (files are saved in the local storage, so they don't reset after a reconnect/server restart)
+- File persistence (files are saved in the local storage, so they don't reset after a reconnect/server restart)
 - Autocompletion with the newest typings (dynamically downloaded from the typings repo)
 - Ability to use code editor with keybinds only (Ctrl + Alt + / to see all the keybinds)
 - Autocompletion snippets (Ctrl + Alt + ' to see all the autocompletion snippets)

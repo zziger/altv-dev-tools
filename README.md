@@ -44,6 +44,7 @@ Features:
 - Leaving fly will teleport you to the ground (unless you're holding space)
 - You can change speed by scrolling mouse wheel
 - Q - Fly Down, E - Fly Up
+- Hold Ctrl - Slow down, Hold Shift - speed up
 
 ## Keybinds
 

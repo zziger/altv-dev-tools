@@ -48,6 +48,7 @@ interface CodeEditorState {
     modal?: React.ComponentType<CodeEditorModalProps>;
     result: string;
     settings: Record<string, any>;
+    halfTransparent: boolean;
 }
 
 class CodeEditor extends React.Component<CodeEditorProps, CodeEditorState> {
@@ -63,7 +64,8 @@ class CodeEditor extends React.Component<CodeEditorProps, CodeEditorState> {
             themeInUi: false,
             themeInConsole: false,
             highlightSeparators: true
-        }
+        },
+        halfTransparent: false
     }
 
     private _mainBlockRef = React.createRef<HTMLDivElement>();
@@ -74,6 +76,7 @@ class CodeEditor extends React.Component<CodeEditorProps, CodeEditorState> {
     componentDidMount() {
         document.addEventListener('keydown', this.onKeyPress);
         window.alt.on('log', this.log);
+        window.alt.on('codeEditor:halfTransparent', this.changeOpacity);
         ClientMethods.get('codeEditor:settings').then(d => this.setState({
             settings: d ?? {
                 theme: 'vs-dark',
@@ -88,6 +91,7 @@ class CodeEditor extends React.Component<CodeEditorProps, CodeEditorState> {
         document.removeEventListener('keydown', this.onKeyPress);
         document.addEventListener('keydown', this.onKeyPress);
         window.alt.off('log', this.log);
+        window.alt.off('codeEditor:halfTransparent', this.changeOpacity);
     }
 
     private converter = new Convert({
@@ -95,6 +99,10 @@ class CodeEditor extends React.Component<CodeEditorProps, CodeEditorState> {
         escapeXML: true,
         stream: false,
     });
+
+    changeOpacity = (state: boolean) => {
+        this.setState({ halfTransparent: state });
+    }
 
     log = (id: number, data: string) => {
         if (this.actionId !== id) return;
@@ -338,7 +346,7 @@ class CodeEditor extends React.Component<CodeEditorProps, CodeEditorState> {
 
         styleColors['--sep'] = this.state.settings.highlightSeparators === false ? styleColors['--bg'] : styleColors['--fg'];
 
-        return <ResizableWindow bgColor={colors.background} fgColor={colors.foreground} name="codeEditor" visible={this.props.active}>
+        return <ResizableWindow bgColor={colors.background} fgColor={colors.foreground} name="codeEditor" visible={this.props.active} opacity={this.state.halfTransparent ? 0.3 : 1}>
             {(startMove, dragging) => <>
                 <div className="header" onMouseDown={startMove}>
                     <div className="name">Code

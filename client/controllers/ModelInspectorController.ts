@@ -1,6 +1,5 @@
 import alt, {IVector3, Vector3} from "alt-client";
 import natives from "natives";
-import native from "natives";
 import Utils from "../utils/Utils";
 import MouseController from "./MouseController";
 import {screenToWorld} from "../utils/ScreenToWorld";
@@ -93,18 +92,18 @@ export default class ModelInspectorController {
 
         let vertexes: Vertexes | undefined = undefined;
         if (hasDrawable) {
-            const [, minVR, maxVR] = native.getModelDimensions(model);
+            const [, minVR, maxVR] = natives.getModelDimensions(model);
             // prevents clipping
             const [minV, maxV] = [new Vector3(-0.001, -0.001, -0.001).add(minVR), new Vector3(0.001, 0.001, 0.001).add(maxVR)];
             vertexes = [
-                native.getOffsetFromEntityInWorldCoords(entityHit, minV.x, minV.y, maxV.z),
-                native.getOffsetFromEntityInWorldCoords(entityHit, minV.x, maxV.y, maxV.z),
-                native.getOffsetFromEntityInWorldCoords(entityHit, maxV.x, minV.y, maxV.z),
-                native.getOffsetFromEntityInWorldCoords(entityHit, maxV.x, maxV.y, maxV.z),
-                native.getOffsetFromEntityInWorldCoords(entityHit, minV.x, minV.y, minV.z),
-                native.getOffsetFromEntityInWorldCoords(entityHit, minV.x, maxV.y, minV.z),
-                native.getOffsetFromEntityInWorldCoords(entityHit, maxV.x, maxV.y, minV.z),
-                native.getOffsetFromEntityInWorldCoords(entityHit, maxV.x, minV.y, minV.z),
+                natives.getOffsetFromEntityInWorldCoords(entityHit, minV.x, minV.y, maxV.z),
+                natives.getOffsetFromEntityInWorldCoords(entityHit, minV.x, maxV.y, maxV.z),
+                natives.getOffsetFromEntityInWorldCoords(entityHit, maxV.x, minV.y, maxV.z),
+                natives.getOffsetFromEntityInWorldCoords(entityHit, maxV.x, maxV.y, maxV.z),
+                natives.getOffsetFromEntityInWorldCoords(entityHit, minV.x, minV.y, minV.z),
+                natives.getOffsetFromEntityInWorldCoords(entityHit, minV.x, maxV.y, minV.z),
+                natives.getOffsetFromEntityInWorldCoords(entityHit, maxV.x, maxV.y, minV.z),
+                natives.getOffsetFromEntityInWorldCoords(entityHit, maxV.x, minV.y, minV.z),
             ];
         }
 

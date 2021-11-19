@@ -18,6 +18,7 @@ interface ResizableWindowProps {
     visible?: boolean;
     bgColor?: string;
     fgColor?: string;
+    opacity: number;
 }
 
 interface ResizableWindowState {
@@ -177,7 +178,8 @@ export class ResizableWindow extends React.Component<ResizableWindowProps, Resiz
                 height: this.state.windowSize.height,
                 '--bg': Utils.hexToRgb(this.props.bgColor ?? '2d2d2d')!.join(', '),
                 '--fg': Utils.hexToRgb(this.props.fgColor ?? 'ffffff')!.join(', '),
-                display: this.props.visible === false ? 'none' : 'grid'
+                display: this.props.visible === false ? 'none' : 'grid',
+                opacity: this.props.opacity ?? 1
             } as any} ref={this._windowRef}>
                 <div className="corner left" onMouseDown={this.getResize(false, false)}/>
                 <div className="edge horizontal" onMouseDown={this.getResize(undefined, false)}/>

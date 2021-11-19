@@ -29,6 +29,7 @@ export default class CodeEditorController {
     }
 
     private _state = false;
+    private _opacity = false;
 
     private static readonly inspectSettings = {
         colors: true,
@@ -129,15 +130,19 @@ export default class CodeEditorController {
     }
 
     private onKeydown = (key: number) => {
-        if (key !== 117) return;
-        this._state = !this._state;
-        if (this._state) {
-            ControlsController.instance.block('codeEditor');
-            MouseController.instance.toggleMouse(true);
-        } else {
-            ControlsController.instance.unblock('codeEditor');
-            MouseController.instance.toggleMouse(false);
+        if (key === 117) {
+            this._state = !this._state;
+            if (this._state) {
+                ControlsController.instance.block('codeEditor');
+                MouseController.instance.toggleMouse(true);
+            } else {
+                ControlsController.instance.unblock('codeEditor');
+                MouseController.instance.toggleMouse(false);
+            }
+            webview.emit('toggle', 'codeEditor', this._state);
         }
-        webview.emit('toggle', 'codeEditor', this._state);
+        if (key === 116) {
+            webview.emit('codeEditor:halfTransparent', (this._opacity = !this._opacity));
+        }
     };
 }

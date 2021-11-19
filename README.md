@@ -43,6 +43,8 @@ Features:
 `F2` - Toggle cursor<br>
 `F3` - Model inspector<br>
 `F4` - Fly<br>
+`Space + F4` - Leave fly without teleportation to the ground<br>
+`Shift + F4` - Freecam<br>
 `F5` - Code editor half-transparent mode<br>
 `F6` - Code editor<br>
 `F9` - Teleport to a waypoint on a map<br>

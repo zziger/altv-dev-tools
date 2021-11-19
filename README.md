@@ -1,6 +1,6 @@
 # alt:V Server developer tools
 
-### Tools include:
+## Tools include:
 - Powerful ingame code editor
 - Model inspector
 - Fly
@@ -10,6 +10,7 @@
 ### Code editor
 
 ![Code editor](./.github/codeeditor.png)
+![Code editor themes](./.github/codeeditor2.png)
 
 Ingame code editor allows you to execute some JS code on client- or server- side directly in the game, while having autocompletion, hints, and so on.
 
@@ -57,3 +58,8 @@ Features:
 `Ctrl + Alt + Arrow down` - Next file<br>
 `F7 or Ctrl + Alt + E` - Execute code<br>
 `Ctrl + Alt + '` - Snippets list<br>
+
+## Build
+
+1. `yarn install`
+2. `yarn build`

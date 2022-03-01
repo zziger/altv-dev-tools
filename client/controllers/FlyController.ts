@@ -79,6 +79,8 @@ export default class FlyController {
             this._everyTick = undefined;
         }
 
+        natives.setFocusEntity(alt.Player.local);
+
         if (this._cam) {
             natives.renderScriptCams(false, false, 0, true, false, 0);
             natives.setCamActive(this._cam, false);
@@ -194,5 +196,7 @@ export default class FlyController {
         const [rot, newPos] = this.getNewPos(natives.getCamCoord(this._cam));
         natives.setCamCoord(this._cam, newPos.x, newPos.y, newPos.z);
         natives.setCamRot(this._cam, rot.x, rot.y, rot.z, 2);
+
+        natives.setFocusPosAndVel(newPos.x, newPos.y, newPos.z,0,0,0);
     }
 }

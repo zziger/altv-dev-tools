@@ -2546,6 +2546,11 @@ alphanum-sort@^1.0.0:
   resolved "https://registry.yarnpkg.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
   integrity sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=
 
+altv-esbuild@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/altv-esbuild/-/altv-esbuild-0.3.3.tgz#85230b4064e6cd97b7c88a46471c45fc4f176419"
+  integrity sha512-4hwCmeb/rDgl6bf2Xg/aRrMnQzKO6M5n1sSG9HPdMRmiePVfj/hMjTBkKTwfX7q3kJSGgPYZ9lJ/Phu77KVQGA==
+
 amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"

@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "esbuild ./index.ts --format=esm --bundle --watch --external:alt-* --outfile=../dist/server.js --define:process.env.NODE_ENV=\\\"development\\\" --define:process=\"{\\\"env\\\":{}}\"",
-    "build": "esbuild ./index.ts --format=esm --bundle --external:alt-* --outfile=../dist/server.js --define:process.env.NODE_ENV=\\\"production\\\" --define:process=\"{\\\"env\\\":{}}\""
+    "dev": "node --es-module-specifier-resolution=node build.js --dev",
+    "build": "node --es-module-specifier-resolution=node build.js"
   },
   "keywords": [],
   "author": "",
@@ -18,5 +17,6 @@
   "devDependencies": {
     "@altv/types-client": "^2.3.8",
     "@altv/types-server": "^2.5.1"
-  }
+  },
+  "type": "module"
 }

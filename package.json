@@ -16,6 +16,7 @@
     "build": "concurrently npm:build-*"
   },
   "devDependencies": {
+    "altv-esbuild": "^0.3.3",
     "concurrently": "^6.3.0"
   }
 }

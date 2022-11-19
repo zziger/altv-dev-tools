@@ -8,6 +8,7 @@ import ControlsController from "./ControlsController";
 import Utils from "../utils/Utils";
 import AsyncFunction = Utils.AsyncFunction;
 import {codeHelpers} from "../../shared/codeHelpers";
+import { KeyCode } from "altv-enums";
 
 export default class CodeEditorController {
     static readonly instance = new CodeEditorController();
@@ -129,8 +130,8 @@ export default class CodeEditorController {
         return await serverRPC.request('codeEditor:eval', code, id);
     }
 
-    private onKeydown = (key: number) => {
-        if (key === 117) {
+    private onKeydown = (key: KeyCode) => {
+        if (key === KeyCode.F6) {
             this._state = !this._state;
             if (this._state) {
                 ControlsController.instance.block('codeEditor');
@@ -141,7 +142,7 @@ export default class CodeEditorController {
             }
             webview.emit('toggle', 'codeEditor', this._state);
         }
-        if (key === 116) {
+        if (key === KeyCode.F5) {
             webview.emit('codeEditor:halfTransparent', (this._opacity = !this._opacity));
         }
     };

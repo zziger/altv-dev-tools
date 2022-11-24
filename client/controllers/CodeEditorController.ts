@@ -8,6 +8,7 @@ import ControlsController from "./ControlsController";
 import Utils from "../utils/Utils";
 import AsyncFunction = Utils.AsyncFunction;
 import {codeHelpers} from "../../shared/codeHelpers";
+import { KeyCode } from "altv-enums";
 
 export default class CodeEditorController {
     static readonly instance = new CodeEditorController();
@@ -26,10 +27,19 @@ export default class CodeEditorController {
         })
 
         alt.on('keydown', this.onKeydown);
+
+        // TEST
+        new alt.Utils.ConsoleCommand("hotreload", () => {
+            this.hotReloadEnabled = !this.hotReloadEnabled;
+            alt.log("hotReloadEnabled:", this.hotReloadEnabled);
+
+            alt.emitServer("codeEditor:toggleHotReload", this.hotReloadEnabled);
+        });
     }
 
     private _state = false;
     private _opacity = false;
+    private hotReloadEnabled = false;
 
     private static readonly inspectSettings = {
         colors: true,
@@ -108,6 +118,14 @@ export default class CodeEditorController {
     // endregion
 
     private static async evalClientCode(id: number, code: string) {
+        if (CodeEditorController.instance.hotReloadEnabled) {
+            console.log("evalClientCode with hotreload");
+            return await serverRPC.request('codeEditor:evalClient', code);
+        }
+
+        // TEST
+        console.log("evalClientCode without hotreload");
+
         try {
             const res = await new AsyncFunction('alt', 'console', 'native', 'natives', 'game', ...Object.keys(codeHelpers), code)
             (
@@ -129,8 +147,8 @@ export default class CodeEditorController {
         return await serverRPC.request('codeEditor:eval', code, id);
     }
 
-    private onKeydown = (key: number) => {
-        if (key === 117) {
+    private onKeydown = (key: KeyCode) => {
+        if (key === KeyCode.F6) {
             this._state = !this._state;
             if (this._state) {
                 ControlsController.instance.block('codeEditor');
@@ -141,7 +159,7 @@ export default class CodeEditorController {
             }
             webview.emit('toggle', 'codeEditor', this._state);
         }
-        if (key === 116) {
+        if (key === KeyCode.F5) {
             webview.emit('codeEditor:halfTransparent', (this._opacity = !this._opacity));
         }
     };

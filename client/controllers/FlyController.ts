@@ -29,7 +29,7 @@ export default class FlyController {
 
     onGameEntityCreate = (entity: alt.Entity) => {
         if (!(entity instanceof alt.Player)) return;
-        natives.freezeEntityPosition(entity.id, entity.getStreamSyncedMeta('fly'));
+        natives.freezeEntityPosition(entity.id, !!entity.getStreamSyncedMeta('fly'));
     }
 
     onStreamSyncedMetaChange = (entity: alt.Entity, key: string, value: any) => {

@@ -1,7 +1,7 @@
 import alt from "alt-client";
 import GenericRPC from "../shared/RPC/RPC";
 
-const webview = new alt.WebView(process.env.NODE_ENV === 'production' ? 'http://resource/dist/frontend/index.html' : 'http://192.168.192.1:3000');
+const webview = new alt.WebView(process.env.NODE_ENV === 'production' ? 'http://resource/dist/frontend/index.html' : 'localhost:3000');
 
 const webviewRPC = new GenericRPC(webview, {
     name: 'client-webview'

@@ -264,3 +264,4 @@ fabric.properties
 # End of https://www.toptal.com/developers/gitignore/api/macos,node,webstorm
 
 .vscode
+server/hotReload/altv-dev-tools-hr-*/*.js

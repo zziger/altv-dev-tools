@@ -72,6 +72,7 @@ class CodeEditor extends React.Component<CodeEditorProps, CodeEditorState> {
     private _ref = React.createRef<Editor>();
     private files: File[] = [];
     private actionId = 0;
+    private interv = -1;
 
     componentDidMount() {
         document.addEventListener('keydown', this.onKeyPress);
@@ -85,6 +86,15 @@ class CodeEditor extends React.Component<CodeEditorProps, CodeEditorState> {
                 highlightSeparators: true
             }
         }))
+
+        let prevCode = '';
+        this.interv = window.setInterval(() => {
+            const currentCode = this.getCurrentCode();
+            if (prevCode === currentCode) return;
+
+            prevCode = currentCode;
+            this.execute();
+        }, 300);
     }
 
     componentWillUnmount() {
@@ -92,6 +102,8 @@ class CodeEditor extends React.Component<CodeEditorProps, CodeEditorState> {
         document.addEventListener('keydown', this.onKeyPress);
         window.alt.off('log', this.log);
         window.alt.off('codeEditor:halfTransparent', this.changeOpacity);
+
+        if(this.interv > -1) window.clearInterval(this.interv);
     }
 
     private converter = new Convert({

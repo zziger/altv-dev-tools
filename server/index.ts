@@ -1,7 +1,8 @@
 import alt, { Player } from 'alt-server';
 import util from "util";
-import {codeHelpers} from "../shared/codeHelpers";
-import {Vector3} from "alt-client";
+import { codeHelpers } from "../shared/codeHelpers";
+import { Vector3 } from "alt-client";
+import HotReloadController from './controllers/HotReload';
 
 const colorizeError = (text: string) => '\x1b[31;1m[Error] ' + text + '\x1b[0m';
 const colorizeWarning = (text: string) => '\x1b[33;1m[Warning] ' + text + '\x1b[0m';
@@ -61,6 +62,12 @@ const patchConsole = (player: alt.Player, id: number) => {
 }
 
 alt.onClient('codeEditor:eval', async (player, promiseId, code, id) => {
+    if (HotReloadController.instance.evalForPlayer(player, "server", code)) {
+        console.log("hot reload server evaled");
+        alt.emitClient(player, "$repl", promiseId, "hot reload test");
+        return;
+    }
+
     try {
         const res = await new AsyncFunction('alt', 'player', 'console', ...Object.keys(codeHelpers), code)(
             patchAlt(player, id), player, patchConsole(player, id), ...Object.values(codeHelpers)
@@ -70,13 +77,23 @@ alt.onClient('codeEditor:eval', async (player, promiseId, code, id) => {
         if (e instanceof Error) {
             return alt.emitClient(player, "$repl", promiseId, colorizeError(String(e.stack)));
         }
-        return alt.emitClient(player, "$repl", promiseId, colorizeError(util.inspect(e, {...inspectSettings, colors: false})));
+        return alt.emitClient(player, "$repl", promiseId, colorizeError(util.inspect(e, { ...inspectSettings, colors: false })));
     }
+});
+
+alt.onClient("codeEditor:evalClient", (player, promiseId, code: string) => {
+    HotReloadController.instance.evalForPlayer(player, "client", code);
+    alt.emitClient(player, "$repl", promiseId, "hot reload test");
+});
+
+alt.onClient("codeEditor:toggleHotReload", (player, toggle: boolean) => {
+    HotReloadController.instance.toggleForPlayer(player, toggle);
 });
 
 alt.onClient('qaTools:spawn', (player: Player, vector: Vector3) => {
     player.spawn(vector);
 });
+
 alt.onClient('qaTools:fly', (player: Player, state: boolean) => {
     player.setStreamSyncedMeta('fly', state);
 });

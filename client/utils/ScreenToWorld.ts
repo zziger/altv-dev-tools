@@ -17,7 +17,7 @@ function w2s(position: Vector3): Vector3 | undefined {
 }
 
 function processCoordinates(x: number, y: number) {
-    const res = native.getActiveScreenResolution(0, 0);
+    const res = native.getActualScreenResolution(0, 0);
     let screenX = res[1];
     let screenY = res[2];
 

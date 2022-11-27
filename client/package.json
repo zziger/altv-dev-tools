@@ -13,7 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "@altv/types-client": "^1.9.0",
-    "@altv/types-natives": "^1.4.3",
+    "@altv/types-natives": "^1.4.6",
     "@altv/types-shared": "^1.0.8",
     "esbuild": "^0.13.10"
   },

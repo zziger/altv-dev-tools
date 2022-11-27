@@ -113,7 +113,7 @@ export default class ModelInspectorController {
             coord: natives.getEntityCoords(entityHit, !natives.isEntityDead(entityHit, false)),
             rot: natives.getEntityRotation(entityHit, 2),
             coordHit: endCoords,
-            textureVariation: natives.getObjectTextureVariation(entityHit),
+            textureVariation: natives.getObjectTintIndex(entityHit),
             vertexes
         }
     };

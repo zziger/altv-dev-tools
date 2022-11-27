@@ -40,16 +40,16 @@
     ]
   },
   "devDependencies": {
-    "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "monaco-editor-webpack-plugin": "^5.0.0",
     "@altv/types-client": "^1.9.0",
-    "@altv/types-natives": "^1.4.3",
+    "@altv/types-natives": "^1.4.6",
     "@altv/types-server": "^2.0.7",
     "@altv/types-shared": "^1.0.8",
     "@altv/types-webview": "^1.0.2",
     "@craco/craco": "^6.4.0",
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "monaco-editor-webpack-plugin": "^5.0.0",
     "raw-loader": "^4.0.2",
     "react-app-rewired": "^2.1.8",
     "typescript": "^4.4.4"

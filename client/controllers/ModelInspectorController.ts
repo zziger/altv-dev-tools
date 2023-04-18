@@ -54,7 +54,7 @@ export default class ModelInspectorController {
     onEveryTick = () => {
         if (!this._state) return;
 
-        const resolution = natives.getActiveScreenResolution(0, 0);
+        const resolution = natives.getActualScreenResolution(0, 0);
         const height = 3 / resolution[2];
         const width = (height * resolution[2]) / resolution[1];
         natives.drawRect(0.5, 0.5, width, height, 255, 255, 255, 255, true);

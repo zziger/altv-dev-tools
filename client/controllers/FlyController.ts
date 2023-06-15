@@ -103,7 +103,7 @@ export default class FlyController {
     }
 
     getNewPos(pos: IVector3) {
-        natives.blockWeaponWheelThisFrame();
+        natives.hudSuppressWeaponWheelResultsThisFrame();
 
         for (let blockedKey of FlyController.blockedKeys) {
             natives.disableControlAction(0, blockedKey, true);

@@ -1,0 +1,4 @@
+client-files = [ 'dist/*' ]
+client-main = 'dist/client.js'
+main = 'dist/server.js'
+type = 'js'

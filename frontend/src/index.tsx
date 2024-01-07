@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import './polyfill';
 import './styles/index.css';
 import CodeEditor from './windows/codeEditor/CodeEditor';
@@ -12,12 +12,14 @@ if (!('alt' in window)) {
 }
 
 alt.on('ready', () => {
-    ReactDOM.render(
+    const container = document.getElementById('root');
+    const root = createRoot(container!);
+
+    root.render(
         <React.StrictMode>
             <div id="app">
                 <WindowsManager />
             </div>
-        </React.StrictMode>,
-        document.getElementById('root')
+        </React.StrictMode>
     );
 });

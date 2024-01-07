@@ -11,11 +11,11 @@
     "ansi-to-html": "^0.7.2",
     "cross-env": "^7.0.3",
     "monaco-editor": "^0.29.1",
-    "node-sass": "^6.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-monaco-editor": "^0.46.0",
-    "react-scripts": "4.0.3"
+    "react-scripts": "^5.0.1",
+    "sass": "^1.69.7"
   },
   "scripts": {
     "start": "craco start",
@@ -45,7 +45,7 @@
     "@altv/types-server": "^2.0.7",
     "@altv/types-shared": "^1.0.8",
     "@altv/types-webview": "^1.0.2",
-    "@craco/craco": "^6.4.0",
+    "@craco/craco": "^7.1.0",
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",

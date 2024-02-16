@@ -4,18 +4,18 @@
   "private": true,
   "homepage": ".",
   "dependencies": {
-    "@emotion/react": "^11.5.0",
-    "@emotion/styled": "^11.3.0",
-    "@mui/icons-material": "^5.0.5",
-    "@mui/material": "^5.0.6",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.3",
+    "@mui/material": "^5.15.3",
     "ansi-to-html": "^0.7.2",
     "cross-env": "^7.0.3",
-    "monaco-editor": "^0.29.1",
-    "node-sass": "^6.0.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-monaco-editor": "^0.46.0",
-    "react-scripts": "4.0.3"
+    "monaco-editor": "^0.44.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-monaco-editor": "^0.55.0",
+    "react-scripts": "^5.0.1",
+    "sass": "^1.69.7"
   },
   "scripts": {
     "start": "craco start",
@@ -40,18 +40,19 @@
     ]
   },
   "devDependencies": {
-    "@altv/types-client": "^1.9.0",
-    "@altv/types-natives": "^1.4.6",
-    "@altv/types-server": "^2.0.7",
-    "@altv/types-shared": "^1.0.8",
-    "@altv/types-webview": "^1.0.2",
-    "@craco/craco": "^6.4.0",
-    "@types/node": "^12.0.0",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "^17.0.0",
-    "monaco-editor-webpack-plugin": "^5.0.0",
+    "@altv/types-client": "^15.0.16",
+    "@altv/types-natives": "^15.0.13",
+    "@altv/types-server": "^15.0.11",
+    "@altv/types-shared": "^15.0.9",
+    "@altv/types-webview": "^15.0.8",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@craco/craco": "^7.1.0",
+    "@types/node": "^20.10.7",
+    "@types/react": "^18.2.47",
+    "@types/react-dom": "^18.2.18",
+    "monaco-editor-webpack-plugin": "^7.1.0",
     "raw-loader": "^4.0.2",
-    "react-app-rewired": "^2.1.8",
-    "typescript": "^4.4.4"
+    "react-app-rewired": "^2.2.1",
+    "typescript": "^5.3.3"
   }
 }
